@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;Rest-App-2&apos;&#x0D;&#x0A;- Original project: &apos;Rest-App-2&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     com.sudha.tech.rest.BookRestController.java&#x0D;&#x0A;     com.sudha.tech.rest.CourseController.java&#x0D;&#x0A;     com.sudha.tech.rest.WelcomeController.java" description="Delete elements" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.sudha.tech.rest{WelcomeController.java" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.sudha.tech.rest{BookRestController.java" element3="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.sudha.tech.rest{CourseController.java" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1676048823329" subPackages="false" version="1.0"/>
+</session>

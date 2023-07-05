@@ -1,0 +1,15 @@
+
+server:
+ port: 4774
+ 
+spring:
+ application:
+    name: sb-yml-app
+    
+sudhatech:
+ messages:
+  welcomeMsg: Welcome to SudhaTech   
+  greetMsg: Good Morning 
+  wishMsg: All the best 
+    
+      

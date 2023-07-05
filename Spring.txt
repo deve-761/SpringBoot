@@ -1,0 +1,368 @@
+Spring
+==============
+Enterprise Application contains 3 layers
+     Presentation or UI Layer  ===> UI Logic 
+     Business Layer  ====> Technology 
+     Data Access Layer ====> DB
+
+
+System Architectures:
+=====================
+
+1-Tier ====> single Machine,it will not give perfomrnace
+2-Tier ====> two machines 
+3-Tier ====> three machines 
+
+Types of Enterprise App
+
+     1. Web application 
+            Client-Server Application ===>over the server
+            servelt
+            jsp
+            CGI
+
+     2. Distributed Application 
+           Client -server ====> over the client and server
+           Socket
+           EJB
+           Web Services
+
+Model-I Arch
+
+Model-II Arch
+
+
+
+Spring Modules
+==============
+Spring Core:
+-------------
+   IOC Container Beans,Dependency injection
+
+Spring AOP:
+------------
+Spring ORM:
+-----------
+   Hibernate and Spring Data JPA and TopLink, MyBatis
+
+   JDBC ===> java objects 
+    it will deal Java object you can assign data to the jo
+
+Spring WEB/MVC:
+---------------
+
+Spring DAO/JDBC:
+----------------
+
+Eclipse===>
+
+STS====>
+
+Intellij=====>
+
+
+Steps to prepare First Spring Application:
+==========================================
+
+1. Download Spring Jars 
+2. Provide Spring Setup in Eclipse IDE
+3. Create Bean class
+4. Prepare bean config file
+5. Prepare Test/Client App
+
+
+IOC Containers:
+---------------
+It will read spring configurations from config file
+It will create bean objects
+provide bean objects to the spring app
+
+BeanFactory:
+------------
+Manage the bean objects
+It will provide basic functionality to the spring app create or maintain bean objects as per the bean config details which are 
+mentioned in config file
+
+"org.springframework.beans.factory.BeanFactory"--->Interface
+    Impl Class ==> org.springframework.beans.factory.xml.XmlBeanFactory
+
+1. Create Resource object
+      "org.springframework.core.io.Resource" ===> ByteArrayResource--byte[]
+                                                  FileSystemResource --file sytem
+                                                  ClassPathResource--"classpth"
+                                                  InputStreamResource---InputStream
+                                                  UrlResource---url in the network
+                                                  ServletContextResource---ServletContext
+                                                  PortletContextResource---only for portlet apps
+
+         Resource resource = new ClassPathResource("bean.xml");
+
+
+2. Create BeanFactory object
+       public XmlBeanFactory(Resource resource)
+
+BeanFactory factory = new XmlBeanFactory(resource);
+
+3. Get bean and access business methods
+  public Object getBean(id_name)
+
+HelloBean bean = factory.getBean("hello");
+
+Note: BeanFactory is depricated from Spring3.X onwards
+
+ApplicationContext:
+
+Internationalization(I18N)====>
+Event Handling
+
+"org.springframework.context.ApplicationContext"
+
+
+ClassPathXmlApplicationContext===>application classpth
+
+FileSystemXmlApplicationContext====>our file system
+
+WebXmlApplicationContext====>exited in web app
+
+
+
+
+Beans In SpringFramework
+=======================
+
+1. It should be POJO class
+2. It will not allow extend or implement predefined library except Serializable Interface
+3. it will public , non-abstract and not-final
+4. all the properties is "Private" and all behaviours is "public"
+5. 0-arg constructor and "public"
+
+
+XML configuration:
+  <beans>
+	<bean id="helloBean" class="com.spring.HelloBean"/>
+  </beans>
+  context.getBean("helloBean"); =====> Valid
+
+    <beans>
+	<bean id="bean1 bean2 bean3" class="com.spring.HelloBean"/>
+  </beans>
+   context.getBean("bean1"); =====> NosuchBeanDefinitionException: no bean named "bean1" is defined
+
+
+   <bean id="bean1,bean2,bean3" class="com.spring.HelloBean"/> ====>Invalid
+
+   <bean id="bean1;bean2;bean3" class="com.spring.HelloBean"/> ====>Invalid
+
+   <bean id="bean1bean2bean3" class="com.spring.HelloBean"/> ====>Valid
+
+
+  <beans>
+	<bean id="helloBean" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean = (HelloBean)context.getBean("helloBean"); ====> Valid
+
+
+   <beans>
+	<bean name="bean1 bean2 bean3" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean1 = (HelloBean)context.getBean("bean1");
+   HelloBean bean2 = (HelloBean)context.getBean("bean2");
+   HelloBean bean3 = (HelloBean)context.getBean("bean3"); ====> Valid
+
+
+    <beans>
+	<bean id="bean1" name="bean2" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean1 = (HelloBean)context.getBean("bean1");
+   HelloBean bean2 = (HelloBean)context.getBean("bean2"); ====> Valid
+
+
+   Bean Scopes:
+   ------------
+   Singleton:---  by default spring
+     Ex:
+       <beans>
+	      <bean id="helloBean" class="com.spring.HelloBean" scope="singleton"/>
+      </beans>
+   prototype:
+     <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="prototype" class="com.spring.PrototypeBean" scope="prototype"/>
+
+   </beans>
+   request:  request scope we will use only spring web module. it will not useful in Standlone  Applications
+            it will create separate bean object for each and every request object
+   session:  session scope we will use only spring web module. it will not useful in Standlone  Applications
+            it will create separate bean object for each and every session object in web application
+   globalSession: globalSession scope we will use only spring web module. it will not useful in Standlone  Applications
+                  it will create separate bean object for each and every portlet session
+   application ==> application scope we will use only spring web module. it will not useful in Standlone  Applications
+                   it will create separate bean object for each and every ServletContext object
+
+
+
+
+
+Java Based Configuration:
+
+Sprin up to 2.4 version spring bean xml file mandatory to configure bean classes and their metadata.
+But from spring3.X onwards spring bean config file is optional. Because spring3.x onwards provided java based configuration replacement of xml.
+
+To use java based configuration steps:
+--------------------------------------
+
+1. Create bean classes as per the requirement.
+2. Create beans configurations classes by using Annotations 
+          @Configuration ===>
+          @Bean ====>
+3. In Client/Test class create ApplicationContext object with AnnotationConfigApplicationContext impl class
+4. Get Bean object from context by using context.getBean("jsj");
+5. Access business methods.
+
+Bean Lifecycle:
+---------------
+
+1. Bean Class Loading
+2. Bean Instantiation
+       1. by using constructor:
+            0-arg constructor
+       2. by using Static Factory  Method
+           static factory  method declare in xml file
+       3. by using Instance static Factory Method
+                factory-bean  & factory-method
+           
+3. Bean Initialization
+4. Bean Destruction
+
+  1. Bean Custom Initialization and destruction methods
+        init-method & destroy-method
+  2. By using InitializingBean and DisposalBean callBack interfaces
+              afterPropertiesSet()   destroy()
+  3. By using @PostConstruct and @PreDestroy annotations
+
+
+Bean Inheritance:
+-----------------
+
+
+Nested Beans:
+--------------
+
+BeanPostProcessor:
+-------------------
+
+postProcessBeforeInitialization() --->before executing init()
+
+postProcessAfterInitialization()----> after excuting init()
+
+
+Declaring bean config in another bean config is called as inner or nested beans
+
+
+Inversion Of Control(IOC)
+=========================
+
+Client===>
+
+EmployeeController =====>
+
+EmployeeService  =====>
+
+EmployeeDAO ====>
+
+
+Dependency Injection:
+=======================
+
+Cosntructor Injection:
+----------------------
+
+
+A 
+
+B  {
+
+  
+   private A a;
+
+} 
+
+public B(A a){
+  this.a  = a;
+}
+
+<beans>
+
+   <bean >
+    <constructor-arg value="--"/>
+    <constructor-arg>Value</constructor-arg>
+   </bean
+ </beans
+
+
+
+
+
+Setter Injection:
+-----------------
+
+A 
+B==> A a; ===>ref
+
+
+
+Bean Autowiring
+===============
+<property> or <construtor-arg> under <bean>
+
+<value>, <ref> 
+
+"Autowiring" ===> based on the properties names,properties types without checking <property> or <constructor-arg>
+
+we have to perform autowiring in 4 ways 
+
+ 1. XML based:
+ ---------------
+ we have to use "autowire" attribute in <bean> tag
+
+ Ex: <bean id ="" calss="" autowire="value">
+
+ Autowiring Modes:
+    no: Manually inject the dependent values
+    byName: based on the property names
+    byType: based on the properties types; stter injection
+    constructor: constructor injection
+
+
+ 2. Annotation Based:
+ -----------------------
+ @Required
+ @Autowired
+ @Qualifier
+
+
+
+ Employee
+
+    @Quqlifier(name="acc2")
+    private Account acc;
+
+ Account
+
+ acc1
+ acc2
+
+
+
+
+
+ 3. Auto Discovery[Stereo types]
+ 4. Java Based
+
+
+
+Annotations based configuration:
+

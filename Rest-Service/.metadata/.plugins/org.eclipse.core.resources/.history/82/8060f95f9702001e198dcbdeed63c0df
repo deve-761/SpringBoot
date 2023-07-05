@@ -1,0 +1,5 @@
+package com.realtech.service;
+
+public interface UserService {
+
+}

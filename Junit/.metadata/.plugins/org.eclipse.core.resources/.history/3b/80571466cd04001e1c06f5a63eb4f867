@@ -1,0 +1,10 @@
+package com.junit;
+
+public class PalindromeTest {
+
+	@ValueSource(strings = {"racecar","radar","madam"})
+	public void testPalindrome(String str) {
+		Palindrome palindrome = new Palindrome();
+		palindrome.isPalindrome(str);
+	}
+}

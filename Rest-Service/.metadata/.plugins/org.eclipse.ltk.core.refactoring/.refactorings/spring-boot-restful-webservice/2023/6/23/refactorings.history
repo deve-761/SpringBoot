@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.realtech.servce&apos; to &apos;com.realtech.service&apos;&#x0D;&#x0A;- Original project: &apos;spring-boot-restful-webservice&apos;&#x0D;&#x0A;- Original element: &apos;spring-boot-restful-webservice/src/main/java/com.realtech.servce&apos;&#x0D;&#x0A;- Renamed element: &apos;spring-boot-restful-webservice/src/main/java/com.realtech.service&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.realtech.servce&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.realtech.servce" name="com.realtech.service" qualified="false" references="true" stamp="1685855835640" textual="false" version="1.0"/>
+</session>

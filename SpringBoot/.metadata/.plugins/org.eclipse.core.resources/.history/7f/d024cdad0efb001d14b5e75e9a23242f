@@ -1,0 +1,19 @@
+package com.spring.boot.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring.boot.service.StudentService;
+
+@Controller
+public class StudentController {
+
+	@Autowired
+	private StudentService studentService;
+	
+	@RequestMapping("/welcome")
+	public String showWelcomePage() {
+		
+	}
+}

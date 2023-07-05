@@ -1,0 +1,6 @@
+server.port = 2323
+
+spring.mvc.view.prefix=/WEB-INF/
+spring.mvc.view.suffix=.jsp
+
+spring.main.web-application-type=none

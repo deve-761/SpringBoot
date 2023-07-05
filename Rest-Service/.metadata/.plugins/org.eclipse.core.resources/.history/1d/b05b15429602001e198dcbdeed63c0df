@@ -1,0 +1,5 @@
+package com.realtech.repository;
+
+public interface UserRepository {
+
+}

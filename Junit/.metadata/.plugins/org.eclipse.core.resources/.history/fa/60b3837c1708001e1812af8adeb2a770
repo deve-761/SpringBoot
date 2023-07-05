@@ -1,0 +1,39 @@
+package com.junit;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
+public class CalculatorTest {
+
+	private static Calculator calculator = null;
+
+	@BeforeClass
+	public static void beforeAll() {
+		calculator = new Calculator();
+	}
+
+	@AfterClass
+	public static void afterAll() {
+		calculator = null;
+	}
+
+	@Test
+	public void testAdd() {
+		Integer actualResult = calculator.add(10, 20);
+		Integer expectedResult = 30;
+
+		assertEquals(expectedResult, actualResult);
+	}
+
+	@Test
+	public void testMultiply() {
+		Integer actualResult = calculator.multiply(20, 20);
+		Integer expectedResult = 4001;
+
+		assertEquals(expectedResult, actualResult);
+	}
+}

@@ -1,0 +1,214 @@
+RESTFul Services
+=================
+REST stands for 'Representation State Transfer'
+
+RESTFul services are used to develop Distributed Application
+
+If one application is communicated with another application then those are called as 'Distributed Apps'
+
+Interoperability means irrespective of the platform and language applications can communicated
+
+             Java App  <----------------------> .Net App 
+             .Net App  <----------------------> Python App
+             Python App <---------------------> Java App
+
+Distributed Applications are used for B 2 B communications 
+
+B2B means Business to Business Communication 
+
+Distributed Application will re-use services of one application in another application 
+
+RESTFul services are providing 'Interoperability'
+
+Two Actor's will be involved in Distributed Applications development 
+     
+          1. Provider 
+          2. Consumer 
+
+The application which is providing business services is called as Provided Application 
+
+The application which is accessing business services is called as Customer Application 
+
+distributed-app.png
+###################
+
+Note: One Provider application can have multiple consumer applications
+
+Provider And Consumer will communicate using HTTP as a mediator 
+
+Provider and Consumer will exchnage the data in Text/XML/JSON format 
+
+Note: In Industry we will use JSON format to exchange data from one application to another application
+
+C&P.jpg
+#######
+
+To start our journey with RESTFul services development we should be good in below areas.
+
+1. HTTP Protocol(Methods, Status Codes, Req Structure & Res Structure)
+2. XML and JAX-B API 
+3. JSON and Jackson API 
+
+What is HTTP:
+-------------
+HTTP stands for Hyper Text Transfer Protocol 
+
+It act as a mediator between client & server(Consumer & Provider)
+
+Consumer application will send HTTP Req to Provider application 
+
+Provider application will process the request and will send HTTP response to Consumer 
+
+HTTP Methods:
+-------------
+HTTP methods are used to send request from Consumer application to Provider application 
+
+HTTP method will represent what type of operating client/consumer wants to perform with Provider
+
+GET
+POST
+PUT 
+DELETE 
+
+GET request is used to retrieve dat from Provider application 
+GET request will not have body 
+To send any data from consumer using GET request then we will use Path Params & Query Params
+
+Note: Path Params & Query Params data will be displayed in the URL
+      It is not recommended to send sensitive / secret data using Path Params & Query Params
+
+GET request is Idempotent(means if you send same GET request for multiple times aslo nothing will change at server)
+
+POST request is used to create a new record at server 
+When consumer wants to send huge data/sensitive data then Consumer will use POST request 
+POST request contains request body 
+POST request is Non-Idempotent
+
+Note: In POST request we can send in URL and in Request Body 
+      Request Body is the recommended approach to send sensitive data over server 
+
+PUT request is used update a record at server 
+When consumer wants to update a record at then consumer will send PUT request to Provider 
+PUT request contains request body 
+PUT request is Idempotent 
+
+Note: In PUT request we can send in URL and in Request Body 
+      Request Body is the recommended approach to send sensitive data over server 
+
+DELETE request is used to delete a record at server 
+DELETE request contains request body 
+DELETE request is Idempotent
+
+Note: In PUT request we can send in URL and in Request Body
+
+
+HTTP Request Structure:
+-----------------------
+1. Initial Request Line(HTTP method + URL)
+2. Request Headers(key-value)
+3. Blank Line to seperate Header & Body 
+4. Request Body(Request Payload)
+
+HTTP Response Structure:
+------------------------
+1. Initial Request Line(Protocol Version + Status Code + Status Msg)
+2. Request Headers(key-value)
+3. Blank Line to seperate Header & Body 
+4. Request Body(Response Payload)
+
+
+HTTP Status Codes:
+------------------
+HTTP Status Codes will represent how the request process by server / provider 
+
+1xx(100-199) ===> INFO 
+2xx(200-299) ===> OK(success)
+3xx(300-399) ===> Redirect 
+4xx(400-499) ===> Client Error 
+5xx(500-599) ===> Server Error
+
+HTTP-Req-Res.png
+
+XML 
+====
+XML stands for Extensible Markup Language 
+
+XML is free and open source
+
+XML is interoperable(Language independent & Platform Independent)
+
+XML we can use to transfer data from one application to another application 
+
+XML introduced by w3c org 
+
+The initial version of xml is 1.0 and the current version of xml is also 1.0 
+
+XML will represent data in the form of elements 
+
+An element is the combination of start tag and end tag 
+    Ex: <name>Sudha RealTime</name>
+
+We will have 2 types of elements in the XML 
+
+1. Simple Element 
+2. Compound Element 
+
+The element which contains data directly is called as Simple Element 
+    <name>Sudha RealTime</name>
+    <type>Educational</type>
+
+The element which contains child element is called as Compund Element 
+    <person>
+       <id>101</id>
+       <name>Ram</name>
+    </person>
+
+Note: Here <person> is compound element and <id><name> are simple elements 
+
+We can have attribute also for the element 
+     <student branch="CSE">
+         <id>101</id>
+         <name>Ram</name>
+     </student>
+
+Note: XML should have only one root element. Inside the root element we can have multiple child elements.
+
+<persons>
+     <person>
+       <id>101</id>
+       <name>Ram</name>
+    </person> 
+     <person>
+       <id>102</id>
+       <name>Sam</name>
+    </person>  
+</persons>    
+
+
+JAX-B
+======
+JAX-B stands for Java Architecture for XML Binding 
+
+JAX-B is use dto convert Java Object to xml and xml to java object 
+
+JAX-B is free and open source 
+
+JAX-B given by sun microsystems 
+
+JAX-B is part of JDK upto 1.8v 
+
+If you are using JDK1.8+ version of java then need to add JAX-B dependency in pom.xml 
+
+The process of converting Java Obj into xml is called as "Marshalling"
+
+The process of converting xml into Java obj is called as "Un-Marshalling" 
+
+To perform Marshalling and Un-Marshalling we need to design Binding Classes 
+
+The java class which represents the structure of XML is called as Binding class 
+
+JAX-B provided annotations to represent java class as Binding class.
+
+Note: Binding Class creation is one time operation 
+
+Note: Earlier people used to create Binding Classes using XSD. XSD represents structure of xml.

@@ -1,0 +1,72 @@
+package com.realtech.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.realtech.dto.UserDto;
+import com.realtech.entity.User;
+import com.realtech.mapper.UserMapper;
+import com.realtech.repository.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+
+	@Override
+	public UserDto createUser(UserDto userDto) {
+
+
+		//User user = UserMapper.mapToUser(userDto);//replace with model mapper library
+		User user = modelMapper.map(userDto, User.class);
+		
+
+		User savedUser = userRepository.save(user);
+
+		//UserDto savedDto = UserMapper.mapToUserDto(savedUser);//replace with model mapper library
+		UserDto savedDto = modelMapper.map(savedUser, UserDto.class);
+
+		return savedDto;
+	}
+
+	@Override
+	public UserDto getUserById(Long id) {
+		User existingUser = userRepository.findById(id).get();
+		//UserDto userDto = UserMapper.mapToUserDto(existingUser);//replace with model mapper library
+		UserDto userDto = modelMapper.map(existingUser, UserDto.class)
+		return userDto;
+	}
+
+	@Override
+	public List<UserDto> getAllUsers() {
+		List<User> userList = userRepository.findAll();
+		return userList.stream().map(user->UserMapper.mapToUserDto(user)).toList();
+	}
+
+	@Override
+	public UserDto updateUser(UserDto user) {
+		User existingUser = userRepository.findById(user.getId()).get();
+		
+		existingUser.setFirstName(user.getFirstName());
+		existingUser.setLastName(user.getLastName());
+		existingUser.setEmail(user.getEmail());
+		
+		User updatedUser = userRepository.save(existingUser);
+		UserDto userDto = UserMapper.mapToUserDto(updatedUser);
+		return userDto;
+	}
+
+	@Override
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
+	}
+
+}

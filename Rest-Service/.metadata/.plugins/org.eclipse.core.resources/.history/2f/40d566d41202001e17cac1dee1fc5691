@@ -1,0 +1,68 @@
+package com.realtech.springboot.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.realtech.springboot.bean.Customer;
+
+@RestController
+@RequestMapping("/customers")
+public class CustomerController {
+
+	// http://localhost:7272/customers/customer
+	@GetMapping("/customer")
+	public ResponseEntity<Customer> getCustomer() {
+		Customer customer = new Customer(1, "Steve", "Jones");
+		// return customer;
+		return new ResponseEntity<>(customer, HttpStatus.OK);
+		// return ResponseEntity.ok().header("custom-header", "Steve").body(customer);
+	}
+
+	// http://localhost:7272/customers/customers
+	@GetMapping
+	public ResponseEntity<List<Customer>> getCustomers() {
+		List<Customer> customerList = new ArrayList<>();
+		customerList.add(new Customer(1, "Steve", "Jones"));
+		customerList.add(new Customer(2, "Jack", "Robert"));
+		customerList.add(new Customer(3, "Julie", "Smith"));
+		customerList.add(new Customer(4, "Jacob", "James"));
+		return ResponseEntity.ok(customerList);
+	}
+
+	// Spring Boot Rest API with Path Variable
+	// {id} - URI template variable
+	// http://localhost:7272/customers/1/Steve/Jones
+	@GetMapping("/{id}/{first-name}/{lastName}")
+	public ResponseEntity<Customer> customerPathVariable(@PathVariable("id") int customerId,
+			@PathVariable("first-name") String firstName, @PathVariable String lastName) {
+		Customer customer = new Customer(customerId, firstName, lastName);
+		return ResponseEntity.ok(customer);
+	}
+
+	// Spring Boot Rest API with Request Param
+	// http://localhost:7272/customers/query?id=1
+	// http://localhost:7272/customers/query?id=1&firstName=Steve&lastName=Jones
+	@GetMapping("/query")
+	public ResponseEntity<Customer> customerRequestVariable(@RequestParam int id, @RequestParam String firstName,
+			@RequestParam String lastName) {
+		Customer customer = new Customer(id, firstName, lastName);
+		return ResponseEntity.ok(customer);
+	}
+
+	// Spring Boot REST API that includes HTTP POST Request - Creating new resource
+	// @PostMapping and @RequestBody
+	public Customer createCustomer(Customer customer) {
+		System.out.println(customer.getId());
+		System.out.println(customer.getFirstName());
+		System.out.println(customer.getLastName());
+		return customer;
+	}
+}

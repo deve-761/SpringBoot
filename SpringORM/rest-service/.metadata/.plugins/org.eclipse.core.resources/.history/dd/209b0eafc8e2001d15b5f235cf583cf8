@@ -1,0 +1,10 @@
+'-':
+- beans
+- mapping
+endpoints: ''
+exposure: ''
+include: ''
+management: ''
+port: 3382
+server: ''
+web: ''

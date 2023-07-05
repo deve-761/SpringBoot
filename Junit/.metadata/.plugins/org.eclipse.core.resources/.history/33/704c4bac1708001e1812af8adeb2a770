@@ -1,0 +1,10 @@
+package com.junit;
+
+public class AddTest {
+
+	private static Sub sub = null;
+	
+	public void testSub() {
+		
+	}
+}

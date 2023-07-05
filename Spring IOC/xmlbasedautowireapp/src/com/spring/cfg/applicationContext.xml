@@ -1,0 +1,48 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="product" class="com.spring.di.Product">
+		<property name="productId" value="P-7878" />
+		<property name="productName" value="Mobile" />
+		<property name="productQuantity" value="1" />
+		<property name="productCategory" value="Samsung" />
+	</bean>
+	
+	<bean id="product1" class="com.spring.di.Product">
+		<property name="productId" value="P-7878" />
+		<property name="productName" value="Mobile" />
+		<property name="productQuantity" value="1" />
+		<property name="productCategory" value="Samsung" />
+	</bean>
+
+	<bean id="customer" class="com.spring.di.Customer">
+		<property name="cid" value="S-1010" />
+		<property name="cname" value="RC" />
+		<property name="caddr" value="BLR" />
+		<property name="cmobile" value="8484848493" />
+	</bean>
+
+
+	<!-- <bean id="order" class="com.spring.di.Order" autowire="byName"> <property 
+		name="orderId" value="O-6767788" /> <property name="orderLoc" value="Varthur" 
+		/> </bean> -->
+
+	<bean id="order" class="com.spring.di.Order" autowire="byType"> <property 
+		name="orderId" value="O-6767788" /> <property name="orderLoc" value="Varthur" 
+		/> </bean>
+
+
+<!-- 	<bean id="order" class="com.spring.di.Order"
+		autowire="constructor">
+		<constructor-arg name="orderId" value="O-6767788" />
+		<constructor-arg name="orderLoc" value="Varthur" />
+		<constructor-arg name="orderName"
+			value="Flipkart ORder" />
+	</bean> -->
+
+</beans>
+
+

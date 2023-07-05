@@ -1,0 +1,11 @@
+package com.realtech.mapper;
+
+import com.realtech.dto.UserDto;
+import com.realtech.entity.User;
+
+public class UserMapper {
+
+	public static UserDto mapToUserDto(User user) {
+		UserDto userDto = new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
+	}
+}

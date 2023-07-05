@@ -1,0 +1,100 @@
+JSP
+=====
+
+Dynamic Response
+
+
+JSP Directives
+===============
+JSP - Based
+   <%@page import ="java.util.*" %>
+   
+XML-Based 
+      <jsp:directive.page import ="java.util.*">
+	  
+	  
+Page Directive:
+===============
+import,super class,...
+
+Syntax: <%@page atttributes%>
+
+	  language     --> <%page language="java"%>
+	  contentType  --> <%page content-type="text/html"%>
+	  import       <%@page import ="java.util.*" %>
+	  extends      <%@page extends ="com.sudha.LoginPage" %>
+	  info         <%@page info ="this login jsp file" %>
+	  session       <%@page session ="true" %>
+	  isErrorPage  <%@page errorPage="error.jsp"%>
+	  
+	  
+Include Dicrective	  
+==================
+
+body
+footer
+header
+menu.jsp
+
+
+A B C D   ===customer.jsp
+
+maven
+GIT
+Kibana or Splunk
+Jira
+PostMan
+Eclipse
+STS
+IntelliJ
+Junit
+Tomcat
+
+
+
+
+
+Spring   ===> MVC CORE AOP JDBC
+
+SpringBoot ===> Restful  + JPA(ORM)/Hibernate 
+
+getEmploye
+GetAll
+
+
+
+Practice
+
+
+
+Microservices  ===>Rest (Configura)
+
+
+
+SCRIPTLETS
+   
+      <%
+	    .... //block of Java  Code
+		 %>
+		 
+Expression:
+
+<%=variable or expression%>		 
+
+
+
+Comments
+========
+XML-Based
+  <!-- 
+     ----
+	 -->
+
+JSP
+
+<%--
+-----
+-----
+   --%>
+
+Java 

@@ -1,0 +1,866 @@
+Spring
+==============
+Enterprise Application contains 3 layers
+     Presentation or UI Layer  ===> UI Logic 
+     Business Layer  ====> Technology 
+     Data Access Layer ====> DB
+
+
+System Architectures:
+=====================
+
+1-Tier ====> single Machine,it will not give perfomrnace
+2-Tier ====> two machines 
+3-Tier ====> three machines 
+
+Types of Enterprise App
+
+     1. Web application 
+            Client-Server Application ===>over the server
+            servelt
+            jsp
+            CGI
+
+     2. Distributed Application 
+           Client -server ====> over the client and server
+           Socket
+           EJB
+           Web Services
+
+Model-I Arch
+
+Model-II Arch
+
+
+
+Spring Modules
+==============
+Spring Core:
+-------------
+   IOC Container Beans,Dependency injection
+
+Spring AOP:
+------------
+Spring ORM:
+-----------
+   Hibernate and Spring Data JPA and TopLink, MyBatis
+
+   JDBC ===> java objects 
+    it will deal Java object you can assign data to the jo
+
+Spring WEB/MVC:
+---------------
+
+Spring DAO/JDBC:
+----------------
+
+Eclipse===>
+
+STS====>
+
+Intellij=====>
+
+
+Steps to prepare First Spring Application:
+==========================================
+
+1. Download Spring Jars 
+2. Provide Spring Setup in Eclipse IDE
+3. Create Bean class
+4. Prepare bean config file
+5. Prepare Test/Client App
+
+
+IOC Containers:
+---------------
+It will read spring configurations from config file
+It will create bean objects
+provide bean objects to the spring app
+
+BeanFactory:
+------------
+Manage the bean objects
+It will provide basic functionality to the spring app create or maintain bean objects as per the bean config details which are 
+mentioned in config file
+
+"org.springframework.beans.factory.BeanFactory"--->Interface
+    Impl Class ==> org.springframework.beans.factory.xml.XmlBeanFactory
+
+1. Create Resource object
+      "org.springframework.core.io.Resource" ===> ByteArrayResource--byte[]
+                                                  FileSystemResource --file sytem
+                                                  ClassPathResource--"classpth"
+                                                  InputStreamResource---InputStream
+                                                  UrlResource---url in the network
+                                                  ServletContextResource---ServletContext
+                                                  PortletContextResource---only for portlet apps
+
+         Resource resource = new ClassPathResource("bean.xml");
+
+
+2. Create BeanFactory object
+       public XmlBeanFactory(Resource resource)
+
+BeanFactory factory = new XmlBeanFactory(resource);
+
+3. Get bean and access business methods
+  public Object getBean(id_name)
+
+HelloBean bean = factory.getBean("hello");
+
+Note: BeanFactory is depricated from Spring3.X onwards
+
+ApplicationContext:
+
+Internationalization(I18N)====>
+Event Handling
+
+"org.springframework.context.ApplicationContext"
+
+
+ClassPathXmlApplicationContext===>application classpth
+
+FileSystemXmlApplicationContext====>our file system
+
+WebXmlApplicationContext====>exited in web app
+
+
+
+
+Beans In SpringFramework
+=======================
+
+1. It should be POJO class
+2. It will not allow extend or implement predefined library except Serializable Interface
+3. it will public , non-abstract and not-final
+4. all the properties is "Private" and all behaviours is "public"
+5. 0-arg constructor and "public"
+
+
+XML configuration:
+  <beans>
+	<bean id="helloBean" class="com.spring.HelloBean"/>
+  </beans>
+  context.getBean("helloBean"); =====> Valid
+
+    <beans>
+	<bean id="bean1 bean2 bean3" class="com.spring.HelloBean"/>
+  </beans>
+   context.getBean("bean1"); =====> NosuchBeanDefinitionException: no bean named "bean1" is defined
+
+
+   <bean id="bean1,bean2,bean3" class="com.spring.HelloBean"/> ====>Invalid
+
+   <bean id="bean1;bean2;bean3" class="com.spring.HelloBean"/> ====>Invalid
+
+   <bean id="bean1bean2bean3" class="com.spring.HelloBean"/> ====>Valid
+
+
+  <beans>
+	<bean id="helloBean" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean = (HelloBean)context.getBean("helloBean"); ====> Valid
+
+
+   <beans>
+	<bean name="bean1 bean2 bean3" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean1 = (HelloBean)context.getBean("bean1");
+   HelloBean bean2 = (HelloBean)context.getBean("bean2");
+   HelloBean bean3 = (HelloBean)context.getBean("bean3"); ====> Valid
+
+
+    <beans>
+	<bean id="bean1" name="bean2" class="com.spring.HelloBean"/>
+  </beans>
+   HelloBean bean1 = (HelloBean)context.getBean("bean1");
+   HelloBean bean2 = (HelloBean)context.getBean("bean2"); ====> Valid
+
+
+   Bean Scopes:
+   ------------
+   Singleton:---  by default spring
+     Ex:
+       <beans>
+	      <bean id="helloBean" class="com.spring.HelloBean" scope="singleton"/>
+      </beans>
+   prototype:
+     <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="prototype" class="com.spring.PrototypeBean" scope="prototype"/>
+
+   </beans>
+   request:  request scope we will use only spring web module. it will not useful in Standlone  Applications
+            it will create separate bean object for each and every request object
+   session:  session scope we will use only spring web module. it will not useful in Standlone  Applications
+            it will create separate bean object for each and every session object in web application
+   globalSession: globalSession scope we will use only spring web module. it will not useful in Standlone  Applications
+                  it will create separate bean object for each and every portlet session
+   application ==> application scope we will use only spring web module. it will not useful in Standlone  Applications
+                   it will create separate bean object for each and every ServletContext object
+
+
+
+
+
+Java Based Configuration:
+
+Sprin up to 2.4 version spring bean xml file mandatory to configure bean classes and their metadata.
+But from spring3.X onwards spring bean config file is optional. Because spring3.x onwards provided java based configuration replacement of xml.
+
+To use java based configuration steps:
+--------------------------------------
+
+1. Create bean classes as per the requirement.
+2. Create beans configurations classes by using Annotations 
+          @Configuration ===>
+          @Bean ====>
+3. In Client/Test class create ApplicationContext object with AnnotationConfigApplicationContext impl class
+4. Get Bean object from context by using context.getBean("jsj");
+5. Access business methods.
+
+Bean Lifecycle:
+---------------
+
+1. Bean Class Loading
+2. Bean Instantiation
+       1. by using constructor:
+            0-arg constructor
+       2. by using Static Factory  Method
+           static factory  method declare in xml file
+       3. by using Instance static Factory Method
+                factory-bean  & factory-method
+           
+3. Bean Initialization
+4. Bean Destruction
+
+  1. Bean Custom Initialization and destruction methods
+        init-method & destroy-method
+  2. By using InitializingBean and DisposalBean callBack interfaces
+              afterPropertiesSet()   destroy()
+  3. By using @PostConstruct and @PreDestroy annotations
+
+
+Bean Inheritance:
+-----------------
+
+
+Nested Beans:
+--------------
+
+BeanPostProcessor:
+-------------------
+
+postProcessBeforeInitialization() --->before executing init()
+
+postProcessAfterInitialization()----> after excuting init()
+
+
+Declaring bean config in another bean config is called as inner or nested beans
+
+
+Inversion Of Control(IOC)
+=========================
+
+Client===>
+
+EmployeeController =====>
+
+EmployeeService  =====>
+
+EmployeeDAO ====>
+
+
+Dependency Injection:
+=======================
+
+Cosntructor Injection:
+----------------------
+
+
+A 
+
+B  {
+
+  
+   private A a;
+
+} 
+
+public B(A a){
+  this.a  = a;
+}
+
+<beans>
+
+   <bean >
+    <constructor-arg value="--"/>
+    <constructor-arg>Value</constructor-arg>
+   </bean
+ </beans
+
+
+
+
+
+Setter Injection:
+-----------------
+
+A 
+B==> A a; ===>ref
+
+
+
+Bean Autowiring
+===============
+<property> or <construtor-arg> under <bean>
+
+<value>, <ref> 
+
+"Autowiring" ===> based on the properties names,properties types without checking <property> or <constructor-arg>
+
+we have to perform autowiring in 4 ways 
+
+ 1. XML based:
+ ---------------
+ we have to use "autowire" attribute in <bean> tag
+
+ Ex: <bean id ="" calss="" autowire="value">
+
+ Autowiring Modes:
+    no: Manually inject the dependent values
+    byName: based on the property names
+    byType: based on the properties types; stter injection
+    constructor: constructor injection
+
+
+ 2. Annotation Based:
+ -----------------------
+ @Required
+ @Autowired
+ @Qualifier
+
+
+
+ Employee
+
+    @Quqlifier(name="acc2")
+    private Account acc;
+
+ Account
+
+ acc1
+ acc2
+
+
+ 3. Auto Discovery[Stereo types]:
+
+ "org.springframework.stereotype"
+
+     1. @Component: It will represent a component which is recognized by spring Container
+     2. @Repository: It will represent a calss as DAO
+     3. @Service: It will represent a class as Service class
+     4. @Controller: It will represent  a class Controller class, it will be used in Spring WEB-MVC Module.
+
+
+     <context:component-scan base-package="com.spring"/>
+
+
+
+ 4. Java Based:
+
+
+Spring Validations:
+====================
+the process of checking data vlaidity before using the data in application 
+
+1. Client Side Validation: 
+
+2. Server Side validation:
+
+
+In Spring for if you want to perform validations then you have to use Validator class
+ 
+     "org.springframework.validation.Validator"
+
+1. Prepare a properties file with all validation messages
+
+key-value pair combination  ===> Key is property name
+                                 Value is validation msg
+2. Prepare Validator class
+    1. Define user defined class
+    2. implement Validator interface in user defined class
+    3. implement all corresponding methods
+          supports()
+          validate()
+    4. Mention all the setter methods
+
+3. configure Validator class in spring config file
+
+
+Spring Expression Language(SPEL)
+---------------------------------
+
+
+
+Spring Profiles
+----------------
+
+
+Spring I18N
+------------
+
+en, it,.....
+
+
+
+
+Spring ORM:
+============
+
+EJBs ===> Entity Beans
+
+JPA
+
+Hibernate
+
+IBatis
+
+
+
+Hibernate:
+-----------
+
+We have to perform below operations when we use hibenrate in enterprise applications
+
+1. Persistence class or object
+2. Preparing Mapping File
+3. Prepare Hibernate Configuration file
+4. Prepare Hibernate Client Applicaton
+
+
+To prepare Hibenrate Client Application we have to use following steps 
+
+1. Create Configuration class object
+2. Create Session Factory Object
+3. Create Session Object
+4. Create Transaction object if required
+5. Persistence Operations
+6. Clse Session Factory and Session Objects.
+
+
+
+
+Spring Web MVC
+==============
+
+To develop web applications using MVC design pattern
+
+1. To develop like standalone applications, web applications, Distributed applications 
+2. In spring framework, only web module is able to use MVC Design pattern
+3. Spring framework is light weight framework
+4. Spring Framework is able to provide loosely coupled design pattern
+5. Spring Framework is able to provide clear separation b/w controller layer, Model and view part.
+6. Spring Framework is less API dependent, is easily do debug and testing
+7. Spring Framework providing very good env to integrate other technologies like hibernate,JDBC,.....
+8. Spring Framework providing very good env to use view related tech like HTMl,JSP,velocity,....
+
+
+By using Spring Web Module we can develop Web and Distributed applications
+
+Web Applications will have user interface(UI)
+Customer can access web applications directly using internet
+
+Customer to Business communication (C2B): Facebook, linkedin, Naukri,......
+
+
+Distributed Applications is meant for Business to Business communication
+
+If one application is communicating another application then we will call distributed application
+
+Distributed applications we can develop in 2 ways 
+   1. SOAP Web services
+   2. RESTFul Web Services
+
+   Gpay  ===>    Banking Apps
+   Passport ===>  Adhaar
+   MakeMyTrip  ===> IRCTC 
+
+Advantages:
+-----------
+Easily develop Distributed Applications
+It will support different types UI tech (JSP,HTML,Thymeleaf)
+I18N support
+Form Building 
+XML to JSON conversion
+JSON to Java Object
+
+
+Spring Web MVC Atchitecture:
+----------------------------
+Web.xml
+
+Dispatcher Servlet:
+--------------------
+Dispatcher Servlet is pre-defined servlet class in Spring Web MVC
+
+Dispatcher Servlet is called as Front Controller / Framework Servlet
+
+Dispatcher Servlet responsible for doing pre-processing and post processing for every request
+
+Handler Mapping:
+------------------
+Handler Mapping is pre-defined class in Spring MVC Module
+
+Handler Mapping is used to identify Request Handler class
+
+It will identify which request should be processed by which controller class
+
+Handler Mapper will indentify Request Handler class based on URL pattern
+
+
+Controller:
+-----------
+Controller is a class contains logic to handle request and response
+
+Controller is called as Request Handler 
+
+We will create Controller classes by using @Controller annotation
+
+Controller will return the data to Dispatcher Servlet in the form of ModelAndView Object
+
+Types Of Controllers
+
+Abstarct Controller
+   ParameterizableViewController
+   BaseCommandController
+     SimpleFormController
+     AbstractFormController
+        AbstarctWizardController
+   MultiActionController
+
+
+
+Command class:
+--------------
+
+
+View Resolver:
+--------------
+BeanNameViewResolver
+UrlBasedViewResolver
+InternalResourceViewResolver
+
+View:
+
+To identify the view pages by using View Resolvers
+
+
+Spring configuration file:
+---------------------------
+Controller class and all dependencies configuration
+HandlerMapping configuration
+ViewResolver Configuration
+
+
+Steps to Design Spring MVC Application
+--------------------------------------
+
+1. Create Dynamic Web project with all spring jars in lib folder
+2. Prepare user forms as per the requirement
+3. Prepare Controller component and Command classes as per the requirement
+4. Prepare Spring Configuration file
+5. Create or edit web.xml file with Deispatcher Servlet configuration file
+
+
+Spring Web MVC Application with MAVEN:
+======================================
+
+1. Create Maven Project
+2. Select Archetype: web
+3. Update Pom.xml
+4. Update web.xml
+5. Provide all view resources
+6. Provide all Java resources
+7. Provide xml files
+8. Run Web application
+
+
+Annotations in Spring Web MVC
+------------------------------
+
+@Controller:
+
+
+@RequestMapping
+GET,POST,PUT,PATCH,HEAD,.....
+
+@RequestParam:
+
+
+@SessionAttributes
+
+
+
+A  
+id,name,sal
+
+status success,failure,existed,notexisted
+
+
+B
+name
+
+c 
+sal
+
+
+
+Spring ORM
+----------
+
+ResultSet ==> all the data from DB
+
+
+Employee emp =new Employee();
+emp.setEmpid(rs.getString("eid"));
+
+
+Hibernate ===> ORM Object Relational Mapping
+
+
+Employee employee=session.get("eid",emp);
+
+
+Hibernate
+
+JPA  ===>
+
+TopLink
+
+IBatis
+
+
+Spring MVC with Hibernate:
+==========================
+
+Steps:
+-----
+Create Java Project with Spring MVC and hibernate Libraries
+
+Create Pojo/Bean classes
+
+Prepare Hibenrate Mapping file
+
+Create DAO interafce with implementation class and along with Hibernate Template as property
+
+Prepare Spring Config file
+
+Prepare Client Application
+
+
+
+
+
+
+SpringBoot + Restful WS + JPA  ===> 
+
+SpringBoot + Microservices + JPA  ===>
+
+Intellij + JIRA + STS + POSTMAN + JUNITS + Kibana (Logs Check)
+
+
+
+
+SpringBoot
+=======================================================
+
+SpringBoot is an open source Java based framework
+
+Easy to create standalone, production-based spring applications
+
+Springboot provides production ready features like metrics,health checks and externalized configuration
+
+It simplifies boostrapping an development of Spring Applications
+
+Application execustion will be speedup
+
+Springboot simplifies application development by having all the configurations as defaults
+
+Springboot reduce application development time
+
+Springboot will improve productivity
+
+Springboot will provide simple approach to integrate SpringBoot application with SpringJDBC, Spring ORM, Spring Data Jpa,Spring Security
+
+Springboot will provides Embedded HTTP Servers like Tomcat, Jetty - to test ur application
+
+SpringBoot provides CLI(Command Line Interface)  tool to develop and test SpringBoot applications from command prompt
+
+SpringBoot provides lots of plugins to develop and test Spring boot applications using Build Tools like Maven and Gradle
+
+SpringBoot provides lots of plugins to work with embedded and in-memory databases
+
+
+SpringBoot Features
+-------------------
+
+SpringApplication:
+
+   Sy:
+        public static void main(String arg[]){
+           SpringApplication.run(className,arg);
+        }
+
+Externalized Configuration:
+
+
+Profiles:
+
+@Profile("dev")
+
+springprofile.active = dev or qa or production
+
+
+--spring.profiles.active = dev
+
+
+
+Logging:
+
+Log4J  Slf4j
+
+
+I18N:
+
+
+JSON:
+
+Gson
+
+Jackson
+
+JSON-B
+
+Web Applications:
+
+Tomcat, Jetty, Undertow ===> spring-boot-starter-web
+
+Security:
+
+
+Working With SQL and NoSQL Databases:
+
+Hibernate or JPA ---SQL
+
+MongoDB
+Couchabase
+Cassandra  ====NoSQL
+
+Messaging:
+
+login -- Ac(Electornics) - Check -- Place --(Order Details) - DB
+                                               |
+                                               ActiveMq (Queue) ---OrderDetails fetch from Queue
+                                               JMS
+
+                                               Place order  ---module
+                                               Accept ORder  --
+                                               Shipping the order    ====> ORder info
+                                               Out Of Delivery
+                                               Delivered
+
+
+Cache: 
+
+req -- Application --- DB
+                  
+Second Request --Application --DB
+                    |
+                    Cache
+
+Calling Rest Services with ResteTemplate and WebClient:
+
+
+
+Validations:
+
+Bean Validations 
+
+Properties Files:
+
+server.port = 2773
+
+
+YAML Support:
+
+server
+  port: 2882
+
+
+
+SpringBoot Framework Key Components
+------------------------------------
+
+Spring Boot Starters
+
+Sprig Boot AutoConfigure
+
+Spring Boot CLI
+
+Spring Boot Actuator
+
+
+Spring Boot Starters:
+---------------------
+
+spring-boot-starter-web  ---dependency starter
+          |
+1. spring-boot-starter
+      spring-boot
+      spring-boot-autoconfigure
+      spring-boot-starter-logging
+
+2. spring-web
+
+3. spring-webmvc
+
+4. spring-boot-starter-tomcat
+       tomcat-emdedded-core
+
+
+
+Sprig Boot AutoConfigure:
+--------------------------
+
+@Configuration
+
+@ComponentScan                =====> @SpringBootApplication  == @Configuration + @ComponentScan + @EnableAutoConfiguration
+
+@EnableAutoConfiguration
+
+
+Spring Boot CLI:
+------------------
+
+
+Spring Boot Actuator:
+----------------------
+
+spring-boot-starter-actuator
+
+
+
+Ways To Create Spring Boot Application
+---------------------------------------
+
+1. Using MAVEN project in Eclipse IDE   
+
+2. STS IDE
+
+3. Spring Boot Initialzer
+
+4. Spring Boot CLI

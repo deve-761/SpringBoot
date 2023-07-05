@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;application.properties&apos; to &apos;Rest-Produces-App/src/main/resources&apos;&#x0D;&#x0A;- Original project: &apos;Rest-App-1&apos;&#x0D;&#x0A;- Destination element: &apos;Rest-Produces-App/src/main/resources&apos;&#x0D;&#x0A;- Original element: &apos;application.properties&apos;" description="Copy file" destination="=Rest-Produces-App/src\/main\/resources=/maven.pomderived=/true=/" element1="src/main/resources/application.properties" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1676048605560" units="0" version="1.0"/>
+</session>

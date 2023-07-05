@@ -1,0 +1,60 @@
+JUnit
+===========
+
+What is Unit Testing & Why?
+    UNIT Testing is a type of software testing where individual units or components of a software are tested.
+    The purpose is to validate that each unit of the software code performs as expected.
+    Unit Testing is done during the development(coding phase) of an application by the developers
+    Unit Tests isolate a section of code and verify its correctness.
+    A unit may be an individual function, method, procedure, module, or object.
+
+
+What is Junit
+    Junit is a free and open source Unit Testing framework for Java applications.
+    Junit was developed by Kent Beck and Erich Gamma
+    Its first version was released in 1977
+    It become one of the most popular testing frameworks in the Java community due to its ease of use.
+    It is a lightwieght testing framework which allowed Java developers to write unit test cases in Java language
+    The current version of Junit is 5
+
+
+Junit 5 Architecture
+
+Annotations: 
+   @Test
+   @BeforeEach
+   @AfterEach
+   @BeforeAll
+   @AfterAll
+   @ParameterizedTest
+   
+   @ValueSource
+   @CsvSource            Parameterized Test
+   @CsvFileSource
+   @MethodSource
+   @RepeatedTest
+   @Disabled
+
+Junit Assertions
+    Junit 5 assertions help us in validating the expected output with the actual output of a test case
+    In Short, assertions are nothing but static methods that we call in our tests to verify expected behaviour
+    All Junit Jupiter assertions are present in the org.junit.jupiter.Assertions class
+
+Junit Assertion Methods
+      assertEquals
+      assertNotEquals
+      assertTrue
+      assertFalse
+      assertNull
+      assertNotNull
+      assertSame
+      assrtNotSame
+      assertThrows
+
+Unit Testing Examples
+
+Mocking
+
+Rest API Unit Testing
+
+Code Coverage Jacocoo

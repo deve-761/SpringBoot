@@ -1,0 +1,39 @@
+package com.spring.boot.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.boot.dao.StudentDao;
+import com.spring.boot.entity.Student;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+
+	@Autowired
+	private StudentDao studentDao;
+
+	@Override
+	public String add(Student sto) {
+		String status = studentDao.add(sto);
+		return status;
+	}
+
+	@Override
+	public Student search(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Student sto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String delete(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

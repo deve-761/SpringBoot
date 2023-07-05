@@ -1,0 +1,22 @@
+package com.sudha.tech.client;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+@Service
+public class BookClient {
+
+	public void invokeGetBooks() {
+		String url = "http://localhost:5656/getall/book";
+
+		WebClient client = WebClient.create();
+		
+		String block=client.get() //GET request
+		      .uri(url) //Endpoint url
+		      .retrieve()//retrieve response body
+		      .bodyToMono(String.class) //bind response data
+		      .block(); //make it sync
+		
+		System.out.println(block);
+	}
+}

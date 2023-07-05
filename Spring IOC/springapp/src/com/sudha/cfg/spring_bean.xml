@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="hi" class="com.sudha.HelloBean">
+		<property name="message" value="Java" />
+	</bean>
+	
+	
+	<bean id="user" class="com.sudha.User">
+	<property name="uname" value="Kamal"/>
+	<property name="uqual" value="B.Tech"/>
+	<property name="uage" value="25"/>
+	<property name="uaddr" value="BLR"/>
+	<property name="uemail" value="Kamal@gmail.com"/>
+	<property name="umobile" value="9557575775"/>
+	</bean>
+
+
+</beans>

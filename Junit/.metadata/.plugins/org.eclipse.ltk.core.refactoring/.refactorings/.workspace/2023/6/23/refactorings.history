@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;junit5-parameterized-app&apos;" deleteContents="true" description="Delete resource &apos;junit5-parameterized-app&apos;" element1="/junit5-parameterized-app" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1686098866873"/>
+</session>

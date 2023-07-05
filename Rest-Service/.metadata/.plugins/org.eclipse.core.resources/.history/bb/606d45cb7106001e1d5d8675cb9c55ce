@@ -1,0 +1,5 @@
+package com.realtech.exception;
+
+public class ErrorDetails {
+
+}
